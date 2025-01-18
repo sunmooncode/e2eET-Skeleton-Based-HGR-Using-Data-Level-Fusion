@@ -79,9 +79,15 @@ from _functionsClasses import *
 # ---------------------------
 dls = multiOrientationDataLoader(deets.ds_directory, bs=args.bs, img_size=args.init_img_sz, e2eTunerMode=True, preview=True)
 
+archMultiVOs_func = BaseArchitectures[args.mvo_architecture]
+archTuner_func = BaseArchitectures[args.tnr_architecture]
+
+archMultiVOs_model = archMultiVOs_func(pretrained=True)
+archTuner_model = archTuner_func(pretrained=True)
+
 model = end2endTunerModel(
-    archMultiVOs=BaseArchitectures[args.mvo_architecture],
-    archTuner=BaseArchitectures[args.tnr_architecture],
+    archMultiVOs=archMultiVOs_model,
+    archTuner=archTuner_model,
     dls_vocab=dls.vocab,
     tuner_img_sz=args.init_img_sz,
 )

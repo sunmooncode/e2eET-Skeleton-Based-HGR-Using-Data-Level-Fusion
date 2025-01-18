@@ -142,9 +142,9 @@ def live_stream_hgr(nD):
 
 # [>>>>>]____________________________________________________________
 if __name__ == "__main__":
-    gesture_inference = subprocess.Popen(args="python ./gestureClassInference.py")
-    data_level_fusion = subprocess.Popen(args="python ./dataLevelFusion.py")
-    vispy_output_gui = subprocess.Popen(args="python ./vispyOutputGUI.py")
+    gesture_inference = subprocess.Popen(["python", "gestureClassInference.py"])
+    data_level_fusion = subprocess.Popen(["python", "dataLevelFusion.py"])
+    vispy_output_gui = subprocess.Popen(["python", "vispyOutputGUI.py"])
 
     try:
         live_stream_hgr(nD="3d")

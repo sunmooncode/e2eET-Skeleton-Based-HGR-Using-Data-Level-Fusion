@@ -104,7 +104,7 @@ no_random(seed=deets.e_repr_seed, reproducible=True)
 # -----------------------------------------------
 
 
-class ImageTuples(fastuple):
+class e2eTunerImageTuples(fastuple):
     @classmethod
     def create(cls, fns): return cls(tuple(PILImage.create(f) for f in fns))
 
@@ -126,7 +126,7 @@ class ImageTuples(fastuple):
         return show_image(torch.cat(imgs, dim=2), figsize=[2.5 * len(imgs)] * 2, ctx=ctx, **kwargs)
 
 def ImageTupleBlock():
-    return TransformBlock(type_tfms=ImageTuples.create, batch_tfms=IntToFloatTensor)
+    return TransformBlock(type_tfms=e2eTunerImageTuples.create, batch_tfms=IntToFloatTensor)
 
 class tunerImagesBW(fastuple):
     @classmethod
@@ -165,7 +165,7 @@ def get_mVOs_img_size(subset):
     return PILImage.create(f"{subset.items[0]}/{args.mv_orientations[0]}.png").size
 
 @typedispatch
-def show_batch(x:ImageTuples, y, samples, ctxs=None, max_n=12, nrows=3, ncols=2, figsize=None, **kwargs):
+def show_batch(x:e2eTunerImageTuples, y, samples, ctxs=None, max_n=12, nrows=3, ncols=2, figsize=None, **kwargs):
     if figsize is None: figsize = (ncols*8, nrows*3)
     if ctxs is None: ctxs = get_grid(min(len(samples), max_n), nrows=nrows, ncols=ncols, figsize=figsize)
     # ---
